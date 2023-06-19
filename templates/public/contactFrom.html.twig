@@ -1,0 +1,26 @@
+
+{% extends 'base.html.twig' %}
+
+{% block body  %}
+    <div class="row">
+        <div class="col-4 hor-center middle-box">
+            <h2>{{ pageTitle }}</h2>
+            <p>Írj üzenetet, és lépj velunk kapcsolatba.</p>
+            <form method="post" action="{{ url('submit_contact') }}">
+                <div class="mb-3">
+                    <label for="userName" class="form-label">Neved</label>
+                    <input type="text" class="form-control" id="userName" name="uname">
+                </div>
+                <div class="mb-3">
+                    <label for="emailField" class="form-label">Email címed</label>
+                    <input type="email" class="form-control" id="emailField" name="email">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">Üzeneted</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Küldés</button>
+            </form>          
+        </div>
+    </div> 
+{% endblock  %}
