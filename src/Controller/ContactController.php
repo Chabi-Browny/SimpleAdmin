@@ -2,9 +2,10 @@
 
 namespace App\Controller;
 
-use App\Entity\Contact;
-use App\Dto\ContactDto;
 use App\Controller\Prototype\BasicController;
+use App\Dto\ContactDto;
+use App\Entity\Contact;
+use App\Repository\ContactRepository;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -41,18 +42,19 @@ class ContactController extends BasicController
     public function submitForm(
         Request $request,
         ValidatorInterface $validator,
-        SerializerInterface $serializer
+        SerializerInterface $serializer,
+        ContactRepository $contactRepo
         // #[MapRequestPayload] ContactDto $contactDto
     ): Response
     {
         // dump($contactDto);
         $retVal = [];
 
-        $contactDto = new ContactDto(
-            $request->getPayload()->get('uname'),
-            $request->getPayload()->get('email'),
-            $request->getPayload()->get('question')
-        );
+        $name = $request->getPayload()->get('uname');
+        $email = $request->getPayload()->get('email');
+        $question = $request->getPayload()->get('question');
+
+        $contactDto = new ContactDto( $name, $email, $question );
 
         $errorObj = $validator->validate($contactDto);
 
@@ -64,7 +66,12 @@ class ContactController extends BasicController
         }
         else
         {
-        //ha jó, lementeni!!!!!!
+            $contactEntity = new Contact();
+            $contactEntity->setName($name);
+            $contactEntity->setEmail($email);
+            $contactEntity->setQuestion($question);
+
+            $contactRepo->save( $contactEntity );
 
             $this->addFlash('success', 'Köszönjük szépen a kérdésedet. Válaszunkkal hamarosan keresünk a megadott e-mail címen.');
         }

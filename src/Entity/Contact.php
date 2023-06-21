@@ -22,7 +22,7 @@ class Contact
     #[ORM\Column(length: 125)]
     private ?string $email = null;
 
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[ORM\Column(type: Types::TEXT)]
     private ?string $question = null;
 
     public function getId(): ?int
