@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-4 hor-center middle-box">
             <h2>{{ pageTitle }}</h2>
-            <p>Írj üzenetet, és lépj velunk kapcsolatba.</p>
+            <p>Kérdezz bátran, és írj üzenetet. Lépj velünk kapcsolatba.</p>
             <form method="post" action="{{ url('submit_contact') }}">
                 <div class="mb-3">
                     <label for="userName" class="form-label">Neved</label>
@@ -13,14 +13,28 @@
                 </div>
                 <div class="mb-3">
                     <label for="emailField" class="form-label">Email címed</label>
-                    <input type="email" class="form-control" id="emailField" name="email">
+                    <input type="text" class="form-control" id="emailField" name="email">
                 </div>
                 <div class="mb-3">
-                    <label for="exampleFormControlTextarea1" class="form-label">Üzeneted</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    <label for="questionField" class="form-label">Üzeneted</label>
+                    <textarea class="form-control" id="questionField" name="question" rows="3"></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">Küldés</button>
-            </form>          
+            </form> 
+                <ul>
+                    {% set errors = app.flashes('errors') %}
+                    {% set success = app.flashes('success') %}
+                 
+                    {% if errors is not empty %}
+                        {% for error in errors[0] %}
+                            <li><div class="alert alert-danger" role="alert">{{ error.title }}</div></li>
+                        {% endfor %}
+                    {% endif %}
+
+                    {% if success is not empty %}
+                        <li><div class="alert alert-success" role="alert">{{ success[0] }}</div></li>
+                    {% endif %}
+                </ul>
         </div>
     </div> 
 {% endblock  %}
