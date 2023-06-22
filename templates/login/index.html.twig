@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block body  %}
+    <div class="row">
+        <div class="col-4 hor-center middle-box">
+            <h2>{{ pageTitle }}</h2>
+            <p>Ez itt a belépési oldal. Lépjen be!</p>
+            <form method="post" action="{{ path('form_login') }}">
+                <div class="mb-3">
+                    <label for="userName" class="form-label">Neved</label>
+                    <input type="text" class="form-control" id="userName" name="_username">
+                </div>
+                <div class="mb-3">
+                    <label for="passwField" class="form-label">Jelszó</label>
+                    <input type="password" class="form-control" id="passwField" name="_password">
+                </div>
+                <button type="submit" class="btn btn-primary">Belépés</button>
+            </form> 
+                {% if error %}
+                    <div class="alert alert-danger" role="alert">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+            {#<ul>
+                {% set errors = app.flashes('errors') %}
+                {% set success = app.flashes('success') %}
+
+                {% if errors is not empty %}
+                    {% for error in errors[0] %}
+                        <li><div class="alert alert-danger" role="alert">{{ error.title }}</div></li>
+                    {% endfor %}
+                {% endif %}
+
+                {% if success is not empty %}
+                    <li><div class="alert alert-success" role="alert">{{ success[0] }}</div></li>
+                {% endif %}
+            </ul>#}
+        </div>
+    </div> 
+{% endblock  %}

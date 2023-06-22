@@ -17,22 +17,20 @@ use Symfony\Component\Serializer\SerializerInterface;
 
 /**
  * Description of ContactController
- *
- * @author Csaba Banrabás Barcsa
  */
 class ContactController extends BasicController
 {
     /**/
     public function init()
     {
-        $this->setPageTitle('Üdv a Kapcsolat oldalon');
+        $this->setPageTitle('Kapcsolat');
     }
 
     /**/
     #[Route('/contact', name:'contact')]
     public function contactForm()
     {
-        return $this->render('public/contactFrom.html.twig', [
+        return $this->render('contact/index.html.twig', [
             'pageTitle' => $this->pageTile,
         ]);
     }
@@ -47,9 +45,6 @@ class ContactController extends BasicController
         // #[MapRequestPayload] ContactDto $contactDto
     ): Response
     {
-        // dump($contactDto);
-        $retVal = [];
-
         $name = $request->getPayload()->get('uname');
         $email = $request->getPayload()->get('email');
         $question = $request->getPayload()->get('question');
