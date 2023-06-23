@@ -4,7 +4,6 @@ namespace App\Controller\Prototype;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-//use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Description of BasicController - This is a extension of the AbstractController
@@ -18,13 +17,6 @@ class BasicController extends AbstractController
     {
         $this->init();
     }
-//    #[Route('/basic', name: 'app_basic')]
-//    public function index(): Response
-//    {
-//        return $this->render('basic/index.html.twig', [
-//            'controller_name' => 'BasicController',
-//        ]);
-//    }
 
     public function init(){}
 

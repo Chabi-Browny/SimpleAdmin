@@ -7,3 +7,10 @@
 .middle-box {
     margin-top: 15%;
 }
+
+.wrapp-msg {
+    white-space: nowrap; 
+    width: 15rem; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

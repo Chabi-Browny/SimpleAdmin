@@ -30,9 +30,7 @@ class ContactController extends BasicController
     #[Route('/contact', name:'contact')]
     public function contactForm()
     {
-        return $this->render('contact/index.html.twig', [
-            'pageTitle' => $this->pageTile,
-        ]);
+        return $this->render('contact/index.html.twig');
     }
 
     /**/
@@ -42,7 +40,6 @@ class ContactController extends BasicController
         ValidatorInterface $validator,
         SerializerInterface $serializer,
         ContactRepository $contactRepo
-        // #[MapRequestPayload] ContactDto $contactDto
     ): Response
     {
         $name = $request->getPayload()->get('uname');
