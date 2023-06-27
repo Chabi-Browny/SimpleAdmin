@@ -16,8 +16,8 @@ class ContactDto
         #[Assert\Length(
                 min: 5,
                 max: 60,
-                minMessage: 'Túl kevés karakter! Legalább {{ limit }} hosszú legyen az név.',
-                maxMessage: 'Túl sok karakter! Legfeljebb {{ limit }} hosszú lehet az név.')
+                minMessage: 'Túl kevés karakter! Legalább {{ limit }} hosszú legyen a név.',
+                maxMessage: 'Túl sok karakter! Legfeljebb {{ limit }} hosszú lehet a név.')
         ]
         public readonly ?string $name,
 

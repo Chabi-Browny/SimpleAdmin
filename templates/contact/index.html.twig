@@ -22,20 +22,20 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Küldés</button>
             </form> 
-                <ul>
-                    {% set errors = app.flashes('errors') %}
-                    {% set success = app.flashes('success') %}
-                 
-                    {% if errors is not empty %}
-                        {% for error in errors[0] %}
-                            <li><div class="alert alert-danger" role="alert">{{ error.title }}</div></li>
-                        {% endfor %}
-                    {% endif %}
+            <ul>
+                {% set errors = app.flashes('errors') %}
+                {% set success = app.flashes('success') %}
 
-                    {% if success is not empty %}
-                        <li><div class="alert alert-success" role="alert">{{ success[0] }}</div></li>
-                    {% endif %}
-                </ul>
+                {% if errors is not empty %}
+                    {% for error in errors[0] %}
+                        <li><div class="alert alert-danger" role="alert">{{ error.title }}</div></li>
+                    {% endfor %}
+                {% endif %}
+
+                {% if success is not empty %}
+                    <li><div class="alert alert-success" role="alert">{{ success[0] }}</div></li>
+                {% endif %}
+            </ul>
         </div>
     </div> 
 {% endblock  %}

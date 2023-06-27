@@ -7,9 +7,12 @@
         <li class="nav-item">
           <a class="nav-link" href="{{ url('contact') }}">Kapcsolat</a>
         </li>
-        {% if isLogged %}
+        {% if is_granted('IS_AUTHENTICATED') %}
             <li class="nav-item">
               <a class="nav-link" href="{{ url('messages_list') }}">Üzenetek</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('app_users_index') }}">Felhasználók</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{ url('app_logout') }}">Kilépés</a>

@@ -1,0 +1,36 @@
+{#{{ dump(form) }}
+{{ dump(form_errors(form.username)) }}
+#}
+
+
+{{ form_start(form) }}
+    <div class="mb-3">
+        {{ form_label(form.username, 'Név',{'label_attr': {'class': 'form-label'}}) }}
+        {{ form_widget(form.username, {'attr':{'class':'form-control'}}) }}
+        {% if ( form_errors(form.username) is not empty  ) %}
+            <div class="alert alert-danger" role="alert">
+                {{ form_errors(form.username) }}
+            </div>
+        {% endif %}
+    </div>
+    <div class="mb-3">
+        {{ form_label(form.password, 'Jelszó',{'label_attr': {'class': 'form-label'}}) }}
+        {{ form_widget(form.password, {'attr':{'class':'form-control', 'type':'password'}}) }}
+        {% if ( form_errors(form.password) is not empty  ) %}
+            <div class="alert alert-danger" role="alert">
+                {{ form_errors(form.password) }}            
+            </div>
+        {% endif %}
+    </div>
+    <div class="mb-3">
+        {{ form_label(form.roles, 'Jogosultság',{'label_attr': {'class': 'form-label'}}) }}
+        {{ form_widget(form.roles, {'attr':{'class':'form-select'}}) }}
+        {% if ( form_errors(form.roles) is not empty  ) %}
+            <div class="alert alert-danger" role="alert">
+                {{ form_errors(form.roles) }}            
+            </div>
+        {% endif %}
+    </div>
+    
+    <button class="btn btn-primary">{{ button_label|default('Mentés') }}</button>
+{{ form_end(form) }}

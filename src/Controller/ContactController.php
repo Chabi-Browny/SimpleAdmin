@@ -46,9 +46,7 @@ class ContactController extends BasicController
         $email = $request->getPayload()->get('email');
         $question = $request->getPayload()->get('question');
 
-        $contactDto = new ContactDto( $name, $email, $question );
-
-        $errorObj = $validator->validate($contactDto);
+        $errorObj = $validator->validate( new ContactDto( $name, $email, $question ) );
 
         $errors = json_decode( $serializer->serialize($errorObj, 'json'), true);
 

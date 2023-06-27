@@ -36,21 +36,54 @@ class BasicController extends AbstractController
         ];
     }
 
-    public function checkUserLogged()
+    /**/
+    public function checkUserLogged(): bool
     {
         return $this->getUser() !== null;
     }
 
     /**/
+    public function getUserRoles()
+    {
+        $roles = $this->getParameter('security.role_hierarchy.roles');
+
+        $roleList = [];
+
+        foreach($roles as $parentRole => $childRoles)
+        {
+            if ( !in_array($parentRole, $roleList) )
+            {
+                $roleList [strtolower($parentRole)]= $parentRole;
+            }
+
+            foreach($childRoles as $childRole)
+            {
+                if (!in_array($childRole, $roleList))
+                {
+                    $roleList [strtolower($childRole)]= $childRole;
+                }
+            }
+        }
+
+        return $roleList;
+    }
+
+    public function isRootAdmin()
+    {
+        
+    }
+
+    /**/
     public function render(string $view, array $viewData = [], $response = null): Response
     {
-        $params = array_merge(
-            $viewData,
-            [
-                'isLogged' => $this->checkUserLogged(),
-                'pageTitle'     => $this->pageTile,
-            ]
-        );
+        $extraParams =
+        [
+            'isLogged' => $this->checkUserLogged(),
+            'pageTitle'     => $this->pageTile,
+        ];
+
+        $params = array_merge( $viewData, $extraParams );
+
         return parent::render($view, $params, $response);
     }
 }

@@ -34,14 +34,23 @@ security:
             # switch_user: true
             
     role_hierarchy:
-        ROLE_USER:        ROLE_USER
-        ROLE_ADMIN:       ROLE_ADMIN
-        ROLE_SUPER_ADMIN: [ROLE_SUPER_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN]
+        ROLE_ROOT_ADMIN: ROLE_SUPER_ADMIN
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-         - { path: ^/dashboard, roles: ROLE_SUPER_ADMIN }
-         - { path: ^/dashboard, roles: ROLE_ADMIN }
+         - { path: ^/dashboard, roles: [ROLE_ADMIN, ROLE_SUPER_ADMIN] }
+         # list contact messages
+         - { path: ^/messages, roles: [ROLE_ADMIN, ROLE_SUPER_ADMIN] }
+         # list users
+         - { path: ^/users, roles: [ROLE_ADMIN, ROLE_SUPER_ADMIN] }
+         # show user
+         - { path: ^/users/\d+$, roles: [ROLE_ADMIN, ROLE_SUPER_ADMIN], methods: [GET] }
+         # update user
+         - { path: ^/users/\d+$/edit, roles: [ROLE_ADMIN, ROLE_SUPER_ADMIN], methods: [GET, POST] }
+         # delete user
+         - { path: ^/users/\d+$, roles: [ROLE_SUPER_ADMIN], methods: [POST] }
 
 when@test:
     security:

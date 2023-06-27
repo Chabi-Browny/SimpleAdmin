@@ -18,6 +18,7 @@
             {{ include('pageParts/header.html.twig') }}
         </header>
         <main class="container">
+            {% set disabled = (not is_granted('ROLE_ROOT_ADMIN')) ? 'disabled' : '' %}
             {% block body %}{% endblock %}
         </main>
         <footer>
