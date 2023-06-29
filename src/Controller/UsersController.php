@@ -65,7 +65,7 @@ class UsersController extends BasicController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_users_show', methods: ['GET'])]
+    #[Route('/show/{id}', name: 'app_users_show', methods: ['GET'], requirements: ['id' => '\d+'])]
     public function show(Users $user): Response
     {
         return $this->render('users/show.html.twig', [
@@ -94,10 +94,20 @@ class UsersController extends BasicController
     }
 
     #[Route('/{id}', name: 'app_users_delete', methods: ['POST'])]
-    #[IsGranted('ROLE_ROOT_ADMIN', message: 'Csak a root admin törölhet.')]
+    #[IsGranted('ROLE_SUPER_ADMIN', message: 'Csak a super admin törölhet.')]
     public function delete(Request $request, Users $user, UsersRepository $usersRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
+        // checking if it will the root user be deleted?
+        $isRootUserDeletingSelf = $this->hasRootAdminRight($this->getLoggedUserInfos()['roles']) === $this->hasRootAdminRight($user->getRoles());
+        $hasDeleteUserRootRight = $this->hasRootAdminRight($user->getRoles());
+        $loggedUserId = $this->getLoggedUserInfos() !== null ? $this->getLoggedUserInfos()['uId'] : false;
+
+        if (
+            $this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))
+            && !$isRootUserDeletingSelf
+            && !$hasDeleteUserRootRight
+            && ($loggedUserId !== $user->getId())
+        ) {
             $usersRepository->remove($user, true);
         }
 

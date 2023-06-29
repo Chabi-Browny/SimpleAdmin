@@ -3,9 +3,8 @@
 {% block title %}Felhasználó{% endblock %}
 
 {% block body %}
-<div class="row">
-    <div class="col hor-center">
-        <h2>Felhasználó {{ user.username }}</h2>
+    <div class="col-6 hor-center">
+        <h2>Felhasználó: {{ user.username }}</h2>
 
         <table class="table table-hover">
             <tbody>
@@ -24,11 +23,12 @@
             </tbody>
         </table>
 
-        <a href="{{ path('app_users_index') }}" class="btn btn-outline-primary">Vissza a Listára</a>
+        <div class="d-flex flex-row">
+            <a href="{{ path('app_users_edit', {'id': user.id}) }}" class="btn btn-primary me-3">Szekesztés</a>
+            {{ include('users/_delete_form.html.twig') }}
+        </div>
+        
+        <a href="{{ path('app_users_index') }}" class="btn btn-outline-primary mt-3">Vissza a Listára</a>
 
-        <a href="{{ path('app_users_edit', {'id': user.id}) }}" class="btn btn-primary">Szekesztés</a>
-
-        {{ include('users/_delete_form.html.twig') }}            
     </div>
-</div>
 {% endblock %}

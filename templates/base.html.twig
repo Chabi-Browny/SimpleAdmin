@@ -19,7 +19,9 @@
         </header>
         <main class="container">
             {% set disabled = (not is_granted('ROLE_ROOT_ADMIN')) ? 'disabled' : '' %}
-            {% block body %}{% endblock %}
+            <div class="row">
+                {% block body %}{% endblock %}                
+            </div>
         </main>
         <footer>
             

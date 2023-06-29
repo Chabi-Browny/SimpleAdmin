@@ -3,9 +3,14 @@
 {% block title %}New Users{% endblock %}
 
 {% block body %}
-    <h2>Új {{ pageTitle }} létrehozása</h2>
-
-    {{ include('users/_form.html.twig') }}
-
-    <a href="{{ path('app_users_index') }}" class="btn btn-outline-primary">Vissza a listára</a>
+    <div class="col-6 hor-center">
+        <h2>Új {{ pageTitle }} létrehozása</h2>
+        
+        {{ include('users/_form.html.twig') }}
+        <div class="d-flex flex-row">
+            <button class="btn btn-primary" form="myform">{{ button_label|default('Mentés') }}</button>
+        </div>
+        
+        <a href="{{ path('app_users_index') }}" class="btn btn-outline-primary mt-3">Vissza a listára</a>
+    </div>
 {% endblock %}

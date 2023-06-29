@@ -1,9 +1,5 @@
-{#{{ dump(form) }}
-{{ dump(form_errors(form.username)) }}
-#}
 
-
-{{ form_start(form) }}
+{{ form_start(form, {'attr': {'id': 'myform'}, 'method': 'POST' } ) }}
     <div class="mb-3">
         {{ form_label(form.username, 'Név',{'label_attr': {'class': 'form-label'}}) }}
         {{ form_widget(form.username, {'attr':{'class':'form-control'}}) }}
@@ -31,6 +27,4 @@
             </div>
         {% endif %}
     </div>
-    
-    <button class="btn btn-primary">{{ button_label|default('Mentés') }}</button>
 {{ form_end(form) }}

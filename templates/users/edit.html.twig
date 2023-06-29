@@ -3,11 +3,16 @@
 {% block title %}Edit Users{% endblock %}
 
 {% block body %}
-    <h1>Edit Users</h1>
+    <div class="col-6 hor-center">
+        <h2>{{ pageTitle }} szerkesztése</h2>
 
-    {{ include('users/_form.html.twig', {'button_label': 'Update'}) }}
+            {{ include('users/_form.html.twig', {'button_label': 'Update'}) }}
+        <div class="d-flex flex-row">
+            <button class="btn btn-primary me-3" form="myform">{{ button_label|default('Mentés') }}</button>
+            {{ include('users/_delete_form.html.twig') }}        
+        </div>
 
-    <a href="{{ path('app_users_index') }}" class="btn btn-outline-primary">Vissza a listához</a>
-
-    {{ include('users/_delete_form.html.twig') }}
+        
+        <a href="{{ path('app_users_index') }}" class="btn btn-outline-primary mt-3">Vissza a listához</a>        
+    </div>
 {% endblock %}
