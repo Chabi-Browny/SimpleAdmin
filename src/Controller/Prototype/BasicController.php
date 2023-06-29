@@ -21,7 +21,7 @@ class BasicController extends AbstractController
     public function init(){}
 
     /**
-     * @desc - set the current page title
+     * Description - set the current page title
      * @param string $pageTitle
      */
     public function setPageTitle(string $pageTitle)
@@ -30,7 +30,7 @@ class BasicController extends AbstractController
     }
 
     /**
-     * $desc - Get the logged in user some info
+     * Description - Get the logged in user some info
      * @return array|null
      */
     public function getLoggedUserInfos(): ?array
@@ -51,7 +51,7 @@ class BasicController extends AbstractController
     }
 
     /**
-     * @desc - check the user is logged in
+     * Description - check the user is logged in
      * but this built in examination is more convenient --> is_granted('IS_AUTHENTICATED')
      * @return bool
      */
@@ -61,7 +61,7 @@ class BasicController extends AbstractController
     }
 
     /**
-     * @desc - get all role of the users
+     * Description - get all role of the users
      * @return type
      */
     public function getUserRoles()
@@ -90,7 +90,7 @@ class BasicController extends AbstractController
     }
 
     /**
-     * @desc - check the specific user is root admin
+     * Description - check the specific user is root admin
      * @param array $userRolesToCheck
      * @return type
      */
@@ -100,7 +100,7 @@ class BasicController extends AbstractController
     }
 
     /**
-     * @desc - extended Render functionality
+     * Description - extended Render functionality
      * @param string $view
      * @param array $viewData
      * @param type $response
